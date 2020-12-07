@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">My Memory</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="hii_world">Hii World!</string>
+    <string name="moves">Moves: 0</string>
+    <string name="pairs">Pairs: 0/2</string>
+    <string name="image_description">Image description</string>
+    <string name="refresh">Refresh</string>
+    <string name="choose_new_size">Choose new Size</string>
+    <string name="hard_6_x_4">Hard (6 x 4)</string>
+    <string name="medium_6_x_3">Medium (6 x 3)</string>
+    <string name="easy_4_x_2">Easy (4 x 2)</string>
+    <string name="create_custom_game">Create Custom Game</string>
+    <string name="save">Save</string>
+    <string name="game_name_example">Game name (example: panda_fun)</string>
+    <string name="download_custom_game">Download Custom Game</string>
+</resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "28257617084",
+    "project_id": "my-memory-card-flip-game",
+    "storage_bucket": "my-memory-card-flip-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28257617084:android:4b859096e90b1e99fd7cb9",
+        "android_client_info": {
+          "package_name": "com.savimoapps.mymemory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28257617084-fdumc8e5s2mphlqd79l0rqvieqov36t1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfkAmaYXJh8iXFTkJBBUKoBZth22pH864"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28257617084-fdumc8e5s2mphlqd79l0rqvieqov36t1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
