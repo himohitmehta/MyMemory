@@ -15,4 +15,5 @@
     <string name="save">Save</string>
     <string name="game_name_example">Game name (example: panda_fun)</string>
     <string name="download_custom_game">Download Custom Game</string>
+    <string name="enter_game_name">Enter game Name</string>
 </resources>

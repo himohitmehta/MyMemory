@@ -15,8 +15,12 @@ import com.savimoapps.mymemory.models.MemoryCard
 import com.squareup.picasso.Picasso
 import kotlin.math.min
 
-class MemoryBoardAdapter(private val context: Context, private val boardSize: BoardSize, private val cards: List<MemoryCard>
-, private val cardClickListener: CardClickListener) : RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>() {
+class MemoryBoardAdapter(
+    private val context: Context,
+    private val boardSize: BoardSize,
+    private val cards: List<MemoryCard>,
+    private val cardClickListener: CardClickListener
+) : RecyclerView.Adapter<MemoryBoardAdapter.ViewHolder>() {
 
     companion object {
         private const val MARGIN_SIZE = 10
@@ -34,7 +38,8 @@ class MemoryBoardAdapter(private val context: Context, private val boardSize: Bo
         val cardHeight = parent.height / boardSize.getHeight() - (2 * MARGIN_SIZE)
         val cardSideLength = min(cardWidth, cardHeight)
         val view = LayoutInflater.from(context).inflate(R.layout.memory_card, parent, false)
-        val layoutParams = view.findViewById<CardView>(R.id.cardView).layoutParams as ViewGroup.MarginLayoutParams
+        val layoutParams =
+            view.findViewById<CardView>(R.id.cardView).layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.width = cardSideLength
         layoutParams.height = cardSideLength
         layoutParams.setMargins(MARGIN_SIZE, MARGIN_SIZE, MARGIN_SIZE, MARGIN_SIZE)
@@ -57,17 +62,21 @@ class MemoryBoardAdapter(private val context: Context, private val boardSize: Bo
 
             if (memoryCard.isFaceUp) {
                 if (memoryCard.imageUrl != null) {
-                    Picasso.get().load(memoryCard.imageUrl).placeholder(R.drawable.ic_image).into(imageButton)
+                    Picasso.get().load(memoryCard.imageUrl).placeholder(R.drawable.ic_image)
+                        .into(imageButton)
                 } else {
                     imageButton.setImageResource(memoryCard.identifier)
                 }
-            }else {
+            } else {
                 imageButton.setImageResource(R.drawable.ic_launcher_background)
             }
 
             //set color shade for matched cards
             imageButton.alpha = if (memoryCard.isMatched) .4f else 1f
-            val colorStateList = if (memoryCard.isMatched) ContextCompat.getColorStateList(context,R.color.color_gray) else null
+            val colorStateList = if (memoryCard.isMatched) ContextCompat.getColorStateList(
+                context,
+                R.color.color_gray
+            ) else null
             ViewCompat.setBackgroundTintList(imageButton, colorStateList)
             //set image to imageButton
 

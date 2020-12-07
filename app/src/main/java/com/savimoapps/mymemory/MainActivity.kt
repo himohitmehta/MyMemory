@@ -18,6 +18,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var memoryGame: MemoryGame
     private lateinit var adapter: MemoryBoardAdapter
-    private var boardSize: BoardSize = BoardSize.HARD
+    private var boardSize: BoardSize = BoardSize.EASY
 
     private var customGameImages: List<String>? = null
 
@@ -98,6 +99,18 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CREATE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val customGameName = data?.getStringExtra(EXTRA_GAME_NAME)
+            if (customGameName == null) {
+                Log.e(TAG, "Got null custom game from CreateActivity")
+                return
+            }
+            downloadGame(customGameName)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun showDownloadDialog() {
         val boardDownLoadView =
             LayoutInflater.from(this).inflate(R.layout.dialog_download_board, null)
@@ -149,18 +162,6 @@ class MainActivity : AppCompatActivity() {
             customGameImages = null
             setUpBoard()
         })
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == CREATE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val customGameName = data?.getStringExtra(EXTRA_GAME_NAME)
-            if (customGameName == null) {
-                Log.e(TAG, "Got null custom game from CreateActivity")
-                return
-            }
-            downloadGame(customGameName)
-        }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun downloadGame(customGameName: String) {
@@ -264,7 +265,7 @@ class MainActivity : AppCompatActivity() {
         }
         //Actually flip over the card
         if (memoryGame.flipCard(position)) {
-            val i = Log.i(TAG, "Found a match! NumPairs Found ${memoryGame.numPairsFound} ")
+            val i = Log.i(TAG, "Found a match! NumPairs Found ${memoryGame.numPairsFound}.")
 //            val color = ArgbEvaluator.evaluate(
 //                    memoryGame.numPairsFound.toFloat() / boardSize.getNumPairs(),
 //                    ContextCompat.getColor(this,R.color.color_progress_none),

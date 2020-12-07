@@ -141,6 +141,7 @@ class CreateActivity : AppCompatActivity() {
 
     }
 
+    //function for handling image uploads
     private fun handleImageUploading(gameName: String) {
         var didEncounterError = false
         val uploadedImagesUrls = mutableListOf<String>()
@@ -179,6 +180,7 @@ class CreateActivity : AppCompatActivity() {
         }
     }
 
+    //handle all images
     private fun handleAllImagesUploaded(gameName: String, imageUrls: MutableList<String>) {
         //add logic
         db.collection("games").document(gameName)
@@ -193,7 +195,7 @@ class CreateActivity : AppCompatActivity() {
 
                 Log.i(TAG, "Successfully created game $gameName")
                 AlertDialog.Builder(this)
-                    .setTitle("Upload complete!Let's play your game '$gameName'")
+                    .setTitle("Upload complete! Let's play your game '$gameName'!")
                     .setPositiveButton("OK") { _, _ ->
                         val resultData = Intent()
                         resultData.putExtra(EXTRA_GAME_NAME, gameName)
@@ -204,6 +206,7 @@ class CreateActivity : AppCompatActivity() {
             }
     }
 
+    //store images as byteArray
     private fun getImageByteArray(photoUri: Uri): ByteArray {
         val originalBitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val source = ImageDecoder.createSource(contentResolver, photoUri)
@@ -213,15 +216,16 @@ class CreateActivity : AppCompatActivity() {
         }
         Log.i(
             TAG,
-            "original width:${originalBitmap.width} and original height: ${originalBitmap.height}"
+            "original width: ${originalBitmap.width} and original height: ${originalBitmap.height}"
         )
         val scaledBitmap = BitmapScaler.scaleToFitHeight(originalBitmap, 250)
-        Log.i(TAG, "Scaled width ${scaledBitmap.width} and scaled height ${scaledBitmap.height}")
+        Log.i(TAG, "Scaled width: ${scaledBitmap.width} and scaled height: ${scaledBitmap.height}")
         val byteOutputStream = ByteArrayOutputStream()
         scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteOutputStream)
         return byteOutputStream.toByteArray()
     }
 
+    //request Permissions
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -241,6 +245,7 @@ class CreateActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    //launch intent to select photos
     private fun launchIntentForPhotos() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -248,11 +253,12 @@ class CreateActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Choose pics"), PICK_PHOTO_CODE)
     }
 
+    //selected images
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode != PICK_PHOTO_CODE || resultCode != Activity.RESULT_OK || data == null) {
-            Log.w(TAG, "Did not gert back from the launched activity, user likely cancelled flow")
+            Log.w(TAG, "Did not get back from the launched activity, user likely cancelled flow")
         }
         val selectedUri = data!!.data
         val clipData = data.clipData
@@ -274,6 +280,7 @@ class CreateActivity : AppCompatActivity() {
         btnSave.isEnabled = shouldEnableSaveButton()
     }
 
+    //enable save button
     private fun shouldEnableSaveButton(): Boolean {
         //checks whether or not to enable the save button
         if (chosenImagesUri.size != numImagesRequired) {
@@ -286,6 +293,7 @@ class CreateActivity : AppCompatActivity() {
     }
 
 
+    //menu item selection
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
