@@ -1,5 +1,6 @@
 package com.savimoapps.mymemory
 
+import android.animation.ArgbEvaluator
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -266,13 +267,13 @@ class MainActivity : AppCompatActivity() {
         //Actually flip over the card
         if (memoryGame.flipCard(position)) {
             val i = Log.i(TAG, "Found a match! NumPairs Found ${memoryGame.numPairsFound}.")
-//            val color = ArgbEvaluator.evaluate(
-//                    memoryGame.numPairsFound.toFloat() / boardSize.getNumPairs(),
-//                    ContextCompat.getColor(this,R.color.color_progress_none),
-//                    ContextCompat.getColor(this,R.color.color_progress_full)
-//            ) as Int
-//
-//            tvPairs.setTextColor(color)
+            val color = ArgbEvaluator().evaluate(
+                    memoryGame.numPairsFound.toFloat() / boardSize.getNumPairs(),
+                    ContextCompat.getColor(this,R.color.color_progress_none),
+                    ContextCompat.getColor(this,R.color.color_progress_full)
+            ) as Int
+
+            tvPairs.setTextColor(color)
             tvPairs.text = "Pairs: ${memoryGame.numPairsFound} / ${boardSize.getNumPairs()}"
             if (memoryGame.haveWonGame()) {
                 Snackbar.make(clRoot, "You won! Congratulations.", Snackbar.LENGTH_LONG).show()
