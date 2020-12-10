@@ -2,6 +2,7 @@ package com.savimoapps.mymemory
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,12 +14,11 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import com.github.jinatonic.confetti.CommonConfetti
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -276,6 +276,7 @@ class MainActivity : AppCompatActivity() {
             tvPairs.text = "Pairs: ${memoryGame.numPairsFound} / ${boardSize.getNumPairs()}"
             if (memoryGame.haveWonGame()) {
                 Snackbar.make(clRoot, "You won! Congratulations.", Snackbar.LENGTH_LONG).show()
+                CommonConfetti.rainingConfetti(clRoot, intArrayOf(Color.YELLOW,Color.BLUE,Color.RED,Color.MAGENTA)).oneShot()
             }
         }
         tvMoves.text = "Moves: ${memoryGame.getNumMoves()}"

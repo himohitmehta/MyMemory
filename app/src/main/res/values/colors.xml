@@ -10,4 +10,6 @@
     <color name="color_gray">#7A6967</color>
     <color name="color_progress_none">#EC2618</color>
     <color name="color_progress_full">#39DA0D</color>
+    <color name="color_blue_light">#4347FA</color>
+    <color name="color_blue_white">#5B80BA </color>
 </resources>

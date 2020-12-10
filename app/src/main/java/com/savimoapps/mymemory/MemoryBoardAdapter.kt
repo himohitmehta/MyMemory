@@ -68,7 +68,7 @@ class MemoryBoardAdapter(
                     imageButton.setImageResource(memoryCard.identifier)
                 }
             } else {
-                imageButton.setImageResource(R.drawable.ic_launcher_background)
+                imageButton.setImageResource(R.drawable.ic_gifts)
             }
 
             //set color shade for matched cards
