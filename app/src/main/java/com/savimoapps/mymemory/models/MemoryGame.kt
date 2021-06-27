@@ -5,23 +5,19 @@ import com.savimoapps.mymemory.utils.DEFAULT_ICONS
 class MemoryGame(private val boardSize: BoardSize,
                  private val customImages: List<String>?) {
 
-    val cards: List<MemoryCard>
+    val cards: List<MemoryCard> = if (customImages == null) {
+        val chosenImages = DEFAULT_ICONS.shuffled().take(boardSize.getNumPairs())
+        val randomizedImages = (chosenImages + chosenImages).shuffled()
+        randomizedImages.map { MemoryCard(it) }
+
+    }else{
+        val randomizedImages = (customImages + customImages).shuffled()
+        randomizedImages.map { MemoryCard(it.hashCode(),it) }
+    }
     var numPairsFound = 0
     private var numCardFlips = 0
     private var indexOfSingleSelectedCard: Int? = null
     var foundMatch = false
-
-    init {
-        if (customImages == null) {
-            val chosenImages = DEFAULT_ICONS.shuffled().take(boardSize.getNumPairs())
-            val randomizedImages = (chosenImages + chosenImages).shuffled()
-            cards = randomizedImages.map { MemoryCard(it) }
-
-        }else{
-            val randomizedImages = (customImages + customImages).shuffled()
-            cards = randomizedImages.map { MemoryCard(it.hashCode(),it) }
-        }
-    }
 
     //flips the card
     fun flipCard(position: Int): Boolean {
